@@ -73,5 +73,6 @@ Works!
 
 With `docker image ls` we can see our images.
 For detailed information of the image we can run `docker image inspect myfirstimage:latest`
+Or see layers directly with `docker history myfirstimage:latest`
 
 If we would want to release the image we could run `docker push myfirstimage:latest`
