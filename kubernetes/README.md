@@ -34,7 +34,7 @@ Danach:
 - Prüfe ReplicaSet und Pods erneut
 
 Teste:
-- 2 Pods sind aktiv und im Running state
+- 3 Pods sind aktiv und im Running state
 - Service ist verfügbar
 - Zugriff über http://localhost:30080 funktioniert
 
