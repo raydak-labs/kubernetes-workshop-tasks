@@ -27,6 +27,10 @@ kubectl get deployment
 kubectl get deployment -w
 # check the pods
 kubectl get pods
+# check the owner reference of the pod in the metadata
+kubectl get pods -o yaml
+# check the owner reference of the replicaset in the metadata
+kubectl get replicasets -o yaml
 # nice. lets kill them
 kubectl delete deployment nginx-deployment
 
