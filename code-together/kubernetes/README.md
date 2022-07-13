@@ -59,7 +59,94 @@ kubectl get pods
 kubectl create service nodeport nginx-deployment --tcp=80:80 --node-port 30180
 # lets check http://localhost:30180 ... nice like docker!
 
+# Lets change the deployment to use a persistent volume for the website
+# Copy the deployment yaml from below to a file and apply it over the existing one
+kubectl apply -f deployment.yml
+
+# The deployment creates a pod which is stuck in pending, inspect why
+kubectl describe pod ...
+
+# Create the PVC we have forgotten
+# Copy the PVC yaml to a file and apply it
+kubectl apply -f pvc.yml
+# Check the PVC status, it should show Status: Bound
+kubectl get pvc
+
+# Now check the pod again, it should start as the PVC does now exist
+kubectl get pod
+
+# Now check the exposed website again, it should show an error: http://localhost:30180
+# Any idea why?
+
+# Now create a new index.html we want expose with any content you like
+vim index.html
+
+# Now copy your new index.html into the container to the path of the persistent volume
+kubectl cp index.html nginx-deployment-*-*:/usr/share/nginx/html
+
+# Now check the exposed website again, it should show your website: http://localhost:30180
+
+# Let check if the files are really persistent, delete the deployment and create it again
+kubectl delete deployment nginx-deployment
+# Check the deployments and pods to see, if they are gone
+kubectl get deploy
+kubectl get po
+
+# Create the deployment again by applying the yaml from before
+kubectl apply -f deployment.yml
+
+# Now check the exposed website again, it should again show your website: http://localhost:30180
+
+
 # cleanup
+
 kubectl delete svc nginx-deployment
 kubectl delete deployment nginx-deployment
+kubectl delete pvc website-claim
+
+```
+
+## Deployment with PVC
+
+```yml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nginx-deployment
+  name: nginx-deployment
+spec:
+  selector:
+    matchLabels:
+      app: nginx-deployment
+  template:
+    metadata:
+      labels:
+        app: nginx-deployment
+    spec:
+      containers:
+        - image: nginx
+          name: nginx
+          volumeMounts:
+            - mountPath: "/usr/share/nginx/html"
+              name: mypd
+      volumes:
+        - name: mypd
+          persistentVolumeClaim:
+            claimName: website-claim
+```
+
+## PVC
+
+```yml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: website-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Mi
 ```
