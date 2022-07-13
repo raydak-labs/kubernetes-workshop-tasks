@@ -24,14 +24,19 @@ Erstelle ein komplettes Deployment mit Service, um auf die Anwendung zuzugreifen
 
 Folgende Konfiguration soll verwendet werden:
 - Image `nginx`
-- NodePort `8080`
-- Anzahl Replicas `2`
+- NodePort `30080`
+- Anzahl Replicas `1`
 - namespace `task3`
+
+Danach:
+- Skaliere das Deployment auf `3` Replicas und prüfe ReplicaSets und Pods
+- Ändere das Image zu `nginx:alpine`
+- Prüfe ReplicaSet und Pods erneut
 
 Teste:
 - 2 Pods sind aktiv und im Running state
 - Service ist verfügbar
-- Zugriff über http://localhost:8080 funktioniert
+- Zugriff über http://localhost:30080 funktioniert
 
 ## Aufgabe 4
 
