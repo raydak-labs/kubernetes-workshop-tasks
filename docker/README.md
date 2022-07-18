@@ -1,5 +1,7 @@
 # Docker - Aufgaben
 
+Aufgabe 1 + 2 sind überflüssig, wenn code-together gemeinsam bearbeitet wurde.
+
 ## Aufgabe 1
 
 Starte einen Docker Container mit dem image `hello-world`
@@ -20,7 +22,7 @@ Löse die Aufgabe.
 
 ## Aufgabe 4
 
-Baue einen eigenen Container (Basis `nginx:alpine`) und verändere die Standard HTML Seite mit dem Matrix Screen.
+Baue einen eigenen Container (Basis `nginx:alpine`) und verändere die Standard HTML Seite mit dem Matrix Screen (die `index.html` findest du hier im repo unter `task4` oder [Link](./task4/index.html)).
 Hinweis: Lese die Dokumentation zum nginx Container
 
 Test:

@@ -1,5 +1,7 @@
 # Kubernetes - Aufgaben
 
+Aufgabe 1 ist überflüssig, wenn code-together gemeinsam bearbeitet wurde.
+
 ## Aufgabe 1
 
 Starte ein Kubernetes Cluster mit Docker Desktop.
@@ -122,3 +124,11 @@ data:
     allow.textmode=true
     how.nice.to.look=fairlyNice
 ```
+
+## Zusatzaufgaben (TODO)
+
+- Lege eine `Job` an und schaue dir den Status des Jobs, des Pods und die Logs des Jobs an.
+- Erstelle ein `CronJob` und warte bis zu der ersten Ausführung. Trigger einen `Job` aus einem CronJob.
+- Role/RoleBinding ausprobieren
+- Ihr könnt versuchen zwei pods zu deployen (ein nginx und busybox) und versuchen vom busybox aus den nginx pod aufzurufen (via curl oder wget)
+  - `kubectl run -i --tty busybox --image=busybox --restart=Never`
